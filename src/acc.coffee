@@ -1,3 +1,6 @@
+getComputedStyle = (el) ->
+  window.getComputedStyle el
+
 randomInt = (ceiling) ->
   if typeof ceiling != 'number'
     throw new Error('randomInt: No ceiling argument provided.')
@@ -18,14 +21,15 @@ SpecialElement = ->
 SpecialElement.prototype =
   hide: ->
     for el in this.el
-      if el.style.display != 'none'
-        el._defaultDisplay = el.style.display
+      if getComputedStyle(el).display != 'none'
+        el._defaultDisplay = getComputedStyle(el).display
         el.style.display = 'none'
     this
 
   show: ->
     for el in this.el
-      el.style.display = el._defaultDisplay || 'block'
+      if getComputedStyle(el).display == 'none'
+        el.style.display = el._defaultDisplay || 'block'
     this
 
   on: (type, callback) ->
