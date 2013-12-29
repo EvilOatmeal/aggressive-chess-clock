@@ -1,0 +1,119 @@
+doctype
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title ACC
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='acc.css')
+  body
+    article.info
+      h1
+        span Aggressive #{' '}
+        | Chess Clock
+
+      .info_tagline
+        span Make your move in time, #{' '}
+        | or be punished with a #{' '}
+        span random move!
+
+      .info_close: button.btn Let's go!
+
+      h2 Punishment rules
+
+      p You are punished when the clock runs out and you have not made a move.
+      p You must then move the unfortunate piece as instructed toward its doom.
+      p You must perform the first move that you can perform.
+      p If you can't perform a move then get a new move.
+      p If no moves of the chosen piece can be performed or you don't have the piece then get a new piece.
+      p All steps in the move must be moved, up to what is allowed for that piece.
+      p A pawn with an attack move must first try to attack in the instructed direction, and if it can't do that take one step forward instead.
+      p You may break any of these rules in an agreement with your opponent, or just break them like whatever.
+
+      .info_close: button.btn Let's go!
+
+      h2 Tips for more fun
+
+      p Play around with different round times and which pieces can be punished to come up with cool games like:
+
+      ul
+        li
+          h3 The original idea
+          p.
+            4 minutes rounds and all pieces but King and Queen are punishable.
+            Some time to think your moves over but the games won't go on forever.
+        li
+          h3 Play dangerously
+          p.
+            20 seconds rounds, only King and Queen are punishable, and
+            the additional rule that if you can't move you don' have to.
+            Fast-paced danger for the adrenaline hunters.
+
+      p Don't forget you can change these settings any time while you're playing a game of chess.
+
+      .info_close: button.btn Let's go!
+
+      p.info_version Version #{version}
+
+form.setup
+  .setup_option.setup_time
+    label Time
+      input(value='20:07', placeholder='MM:SS')
+
+  .setup_option.setup_pieces
+    p
+      span Which pieces should #{' '}
+      | be punishable?
+
+    ul
+      li: label
+        input(checked, type='checkbox')
+        span.icon.icon-pawn
+        span Pawn
+      li: label
+        input(checked, type='checkbox')
+        span.icon.icon-knight
+        span Knight
+      li: label
+        input(checked, type='checkbox')
+        span.icon.icon-bishop
+        span Bishop
+      li: label
+        input(checked, type='checkbox')
+        span.icon.icon-rook
+        span Rook
+      li: label
+        input(type='checkbox')
+        span.icon.icon-queen
+        span Queen
+      li: label
+        input(type='checkbox')
+        span.icon.icon-king
+        span King
+
+  .setup_start: button.btn Let's go!
+
+.board
+  .clock
+    .clock_time 00:00
+    .clock_actions
+      button.clock_pause Pause
+      button.clock_next Next
+      button.clock_surrender Surrender
+
+  .move
+    div
+      span.move_piece Piece
+      button.move_rerollPiece Reroll Piece
+
+    div
+      span.move_action Action
+      button.move_rerollAction Reroll Action
+
+    button.move_next Next turn
+
+  button.showSetup o
+
+button.showInfo i
+
+script(src='acc.js')
+//script(src='//localhost:35729/livereload.js')
