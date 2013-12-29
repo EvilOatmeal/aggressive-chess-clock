@@ -7,7 +7,7 @@ html(lang='en')
     link(rel='stylesheet', href='acc.css')
   body
     article.info
-      h1
+      h1.info_title
         span Aggressive #{' '}
         | Chess Clock
 
@@ -29,7 +29,7 @@ html(lang='en')
       p A pawn with an attack move must first try to attack in the instructed direction, and if it can't do that take one step forward instead.
       p You may break any of these rules in an agreement with your opponent, or just break them like whatever.
 
-      .info_close: button.btn Let's go!
+      .info_close.info_close-extra: button.btn Let's go!
 
       h2 Tips for more fun
 
@@ -52,7 +52,7 @@ html(lang='en')
 
       .info_close: button.btn Let's go!
 
-      p.info_version Version #{version}
+      .info_version Version #{version}
 
 form.setup
   .setup_option.setup_time
