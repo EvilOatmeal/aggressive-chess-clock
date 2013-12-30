@@ -255,7 +255,7 @@ $board = $('.board')
 $board_showSetup = $('.board_showSetup').on 'click', showSetup
 
 $clock = $('.clock')
-$clock_time = $('.clock_time')
+$clock_time = $('.clock_time').on 'click', startClock
 $clock_pause = $('.clock_pause').on 'click', toggleClockPause
 $clock_surrender = $('.clock_surrender').on 'click', showMove
 $clock_next = $('.clock_next').on 'click', startClock
