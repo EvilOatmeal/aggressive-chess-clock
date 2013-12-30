@@ -269,9 +269,4 @@ $move_action_description = $('.move_action_description')
 $move_next = $('.move_next').on 'click', startClock
 
 showInfo()
-#hideInfo()
-
-#showSetup()
-
-#newGame { preventDefault: -> }
-#showMove()
+showSetup()
