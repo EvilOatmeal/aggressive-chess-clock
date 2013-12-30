@@ -6,6 +6,9 @@ randomInt = (ceiling) ->
     throw new Error('randomInt: No ceiling argument provided.')
   Math.ceil(Math.random() * ceiling)
 
+capitalize = (string) ->
+  string.substr(0, 1).toUpperCase() + string.substr(1)
+
 # Special jQuery like elements
 
 $ = (selector, context) ->
@@ -40,6 +43,21 @@ SpecialElement.prototype =
   html: (string) ->
     for el in this.el
       el.innerHTML = string
+    this
+
+  addClass: (classes) ->
+    classes = classes.split /\s/
+    for el in this.el
+      for newClass in classes
+        el.className += ' ' + newClass
+    this
+
+  removeClass: (classes) ->
+    classes = classes.split /\s/
+    for el in this.el
+      for classToRemove in classes
+        re = new RegExp '(^|\\s+)' + classToRemove + '($|\\s+)', 'g'
+        el.className = el.className.replace re, ' '
     this
 
   focus: ->
@@ -202,7 +220,10 @@ rerollPiece = ->
     piece = 'king'
 
   game.movePiece = piece
-  $move_piece.html piece
+  $move_piece_icon
+    .removeClass('icon-' + ['pawn','rook','knight','bishop','queen','king'].join(' icon-'))
+    .addClass('icon-' + piece)
+  $move_piece_name.html capitalize piece
 
   rerollAction()
 
@@ -215,7 +236,7 @@ rerollAction = ->
     else
       distance = randomInt piece.maxDistance
       description = '' + distance + (if distance > 1 then ' steps ' else ' step ') + direction
-    $move_action.html description
+    $move_action_description.html description
 
 
 # Init
@@ -240,12 +261,17 @@ $clock_surrender = $('.clock_surrender').on 'click', showMove
 $clock_next = $('.clock_next').on 'click', startClock
 
 $move = $('.move')
-$move_piece = $('.move_piece')
-$move_action = $('.move_action')
-$move_rerollPiece = $('.move_rerollPiece').on 'click', rerollPiece
-$move_rerollAction = $('.move_rerollAction').on 'click', rerollAction
+$move_piece = $('.move_piece').on 'click', rerollPiece
+$move_piece_icon = $('.move_piece_icon')
+$move_piece_name = $('.move_piece_name')
+$move_action = $('.move_action').on 'click', rerollAction
+$move_action_description = $('.move_action_description')
 $move_next = $('.move_next').on 'click', startClock
 
 showInfo()
 #hideInfo()
-showSetup()
+
+#showSetup()
+
+#newGame { preventDefault: -> }
+#showMove()

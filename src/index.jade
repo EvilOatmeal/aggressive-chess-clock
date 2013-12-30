@@ -101,15 +101,20 @@ form.setup
       button.clock_surrender Surrender
 
   .move
-    div
-      span.move_piece Piece
-      button.move_rerollPiece Reroll Piece
+    div.move_piece
+      .move_piece_icon.icon
+      .move_piece_name
+      //button.move_piece_reroll.move_reroll
+      //  span.icon.icon-reload(title='Reroll piece')
 
-    div
-      span.move_action Action
-      button.move_rerollAction Reroll Action
+    div.move_action
+      .move_action_description
+      //button.move_action_reroll.move_reroll
+      //  span.icon.icon-reload(title='Reroll move')
 
-    button.move_next Next turn
+    .move_next
+      button
+        span.icon.icon-next
 
   button.showSetup o
 

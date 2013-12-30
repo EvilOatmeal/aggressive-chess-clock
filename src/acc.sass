@@ -114,6 +114,10 @@ label
   content: '\2655'
 .icon-king:after
   content: '\2654'
+.icon-reload:after
+  content: '\21ba' // ↺
+.icon-next:after
+  content: '\00bb' // »
 
 
 // Info
@@ -262,6 +266,43 @@ label
   line-height: 1
 
 
+// Move
+
+.move
+  text-align: center
+
+.move_piece,
+.move_action
+  position: relative
+
+//.move_reroll
+//  display: none
+//  position: absolute
+//  top: 50%
+//  right: $ws
+//  margin-top: -0.5em
+//  color: $color-subtle
+//  background: transparent
+//  border: 0
+
+.move_piece_icon
+  margin-top: $ws
+  font-size: 5em
+
+.move_action
+  padding: $ws 0
+
+.move_action_description
+  padding: $ws 0
+  font-size: $font-size-lg
+  line-height: $line-height-lg
+
+.move_next button
+  background: transparent
+  border: 0
+  font-size: 4em
+
+
 // Smartphone portrait
 
 @media (max-width: $mq-iphone-tall-max)
@@ -326,3 +367,20 @@ label
   .clock_time
     margin: $ws 0 $ws-xs
     font-size: 10em
+
+  .move
+    margin-top: $ws-lg
+
+  .move_piece,
+  .move_action,
+  .move_next
+    float: left
+    width: 33%
+    height: 100%
+
+  .move_action
+    margin-top: $ws
+    padding: $ws-xl 0
+
+  .move_next
+    padding: $ws-xl 0
