@@ -36,9 +36,11 @@ $mq-iphone-wide-max: $mq-iphone-wide-min - 1px
 
 // Defaults
 
-*, *:before, *:after
+*
   margin: 0
   padding: 0
+
+*, *:before, *:after
   box-sizing: border-box
 
 body
@@ -250,19 +252,14 @@ label
   line-height: 1
   text-align: center
 
-.clock_actions
-  display: flex
-  flex-direction: column
-  flex-align: center
-
-  button
+.clock_actions button
     width: 100%
     margin-bottom: $ws
-    padding: $ws-lg 0
+    padding: $ws 0
     background: transparent
     border: 0
-    font-size: $font-size-lg
-    line-height: $line-height-lg
+    font-size: $font-size-xl
+    line-height: 1
 
 
 // Smartphone portrait
@@ -308,6 +305,12 @@ label
       &:nth-child(3n+1)
         clear: left
 
+  .clock_actions
+    button
+      float: left
+      width: 33%
+      margin: 0
+
 @media (min-width: $mq-iphone-tall-min)
   .setup
     margin: $ws-lg $ws-xl
@@ -319,3 +322,7 @@ label
 
   .setup_start
     margin: 0
+
+  .clock_time
+    margin: $ws 0 $ws-xs
+    font-size: 10em
