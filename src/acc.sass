@@ -29,6 +29,10 @@ $ws-xl: round($ws * 2.125)
 
 $z-index-info: 100
 
+$mq-iphone-tall-min: 480px
+$mq-iphone-tall-max: $mq-iphone-tall-min - 1px
+$mq-iphone-wide-min: 320px
+$mq-iphone-wide-max: $mq-iphone-wide-min - 1px
 
 // Defaults
 
@@ -223,18 +227,21 @@ label
   .icon
     margin-right: $ws-xs
 
-.setup_contrast,
 .setup_start
   text-align: center
+  margin: $ws-lg 0
 
 .setup_contrast li
   display: inline-block
-  
+
   & + li
     margin-left: $ws-lg
 
   input
     margin-right: $ws-xs
+
+
+// Clock
 
 .clock_time
   margin: 5rem 0 $ws-lg
@@ -260,25 +267,15 @@ label
 
 // Smartphone portrait
 
-@media (max-width: 419px)
+@media (max-width: $mq-iphone-tall-max)
   .setup_time,
-  .setup_option p
+  .setup_pieces p
     text-align: center
 
-  .setup_pieces
-    p span
-      display: block
+  .setup_pieces p span
+    display: block
 
-    li
-      width: 50%
-
-      &:nth-child(2n+1)
-        clear: left
-
-  .setup_start
-    margin: $ws-lg 0
-
-@media (min-height: 420px)
+@media (min-height: $mq-iphone-wide-min)
   .info h2
     margin-top: $ws-xl
 
@@ -293,20 +290,32 @@ label
   .info_version
     margin: $ws-xl 0
 
+@media (min-height: $mq-iphone-tall-min)
+  .setup_pieces
+    li
+      width: 50%
+
+      &:nth-child(2n+1)
+        clear: left
 
 // Smartphone landscape
 
-@media (min-width: 420px)
+@media (max-height: $mq-iphone-tall-max)
+  .setup_pieces
+    li
+      width: 33%
+
+      &:nth-child(3n+1)
+        clear: left
+
+@media (min-width: $mq-iphone-tall-min)
   .setup
     margin: $ws-lg $ws-xl
-
-  .setup_pieces li
-    width: 33%
-
-    &:nth-child(3n+1)
-      clear: left
 
   .setup_start
     position: absolute
     top: 0
     right: 0
+
+  .setup_start
+    margin: 0
