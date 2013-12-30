@@ -167,8 +167,7 @@ padTimeNumber = (number) ->
 
 pieces =
   pawn:
-    directions: ['forward', 'forward-left', 'forward-right'],
-    maxDistance: 2
+    directions: ['1 step forward', '2 steps forward', 'Attack left', 'Attack right']
   rook:
     directions: ['forward', 'backward', 'left', 'right'],
     maxDistance: 7
@@ -231,11 +230,12 @@ rerollAction = ->
   piece = pieces[game.movePiece]
   if piece
     direction = piece.directions[randomInt piece.directions.length - 1]
-    if game.movePiece == 'knight'
-      description = direction
-    else
-      distance = randomInt piece.maxDistance
-      description = '' + distance + (if distance > 1 then ' steps ' else ' step ') + direction
+    switch game.movePiece
+      when 'pawn', 'knight'
+        description = direction
+      else
+        distance = randomInt piece.maxDistance
+        description = '' + distance + (if distance > 1 then ' steps ' else ' step ') + direction
     $move_action_description.html description
 
 
