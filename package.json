@@ -1,6 +1,6 @@
 {
   "name": "aggressive-chess-clock",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A chess clock with a twist; Make your move in time, or be punished with a random move!",
   "author": "Kenneth Sundqvist <eviloatmeal@gmail.com> (eviloatmeal.se)",
   "license": "MIT",
