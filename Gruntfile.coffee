@@ -5,6 +5,14 @@ module.exports = (grunt) ->
   grunt.initConfig({
     pkg: packageJSON,
 
+    copy:
+      manifest:
+        src: 'src/cache.manifest',
+        dest: 'dist/cache.manifest',
+        options:
+          process: (content) ->
+            content.replace '$version', packageJSON.version
+
     jade:
       options:
         data: packageJSON,
@@ -58,8 +66,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-autoprefixer'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
 
-  grunt.registerTask 'default', ['jade', 'sass', 'coffee', 'autoprefixer']
+  grunt.registerTask 'default', ['copy', 'jade', 'sass', 'coffee', 'autoprefixer']
   grunt.registerTask 'dist', 'default'
   grunt.registerTask 'd', 'dist'
   grunt.registerTask 'w', 'watch'
