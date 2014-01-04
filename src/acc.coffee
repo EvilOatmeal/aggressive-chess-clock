@@ -105,6 +105,16 @@ getTimeLimitFromSetup = ->
   else
     alert 'Invalid Time limit format. Use MM:SS.'
 
+getPunishablePiecesFromSetup = ->
+  enabledPieces = []
+  for el in $setup_pieces.el
+    if el.checked
+      name = el.getAttribute 'name'
+      count = pieces[name].count + 1
+      while count -= 1
+        enabledPieces.push name
+  enabledPieces
+
 
 # Board
 
@@ -167,11 +177,14 @@ padTimeNumber = (number) ->
 
 pieces =
   pawn:
+    count: 8,
     directions: ['1 step forward', '2 steps forward', 'Attack left', 'Attack right']
   rook:
+    count: 2,
     directions: ['forward', 'backward', 'left', 'right'],
     maxDistance: 7
   knight:
+    count: 2,
     directions: [
       '2 steps forward, 1 left', '2 steps forward, 1 right',
       '1 step forward, 2 left', '1 step forward, 2 right',
@@ -179,15 +192,18 @@ pieces =
       '1 step backward, 2 left', '1 step backward, 2 right'
     ]
   bishop:
+    count: 2,
     directions: ['forward-left', 'forward-right', 'backward-left', 'backward-right'],
     maxDistance: 7
   queen:
+    count: 1,
     directions: [
       'forward', 'backward', 'left', 'right',
       'forward-left', 'forward-right', 'backward-left', 'backward-right'
     ],
     maxDistance: 7
   king:
+    count: 1,
     directions: [
       'forward', 'backward', 'left', 'right',
       'forward-left', 'forward-right', 'backward-left', 'backward-right'
@@ -203,28 +219,18 @@ showMove = ->
   $move_next.focus()
 
 rerollPiece = ->
-  badLuck = randomInt 16
+  punishablePieces = getPunishablePiecesFromSetup()
 
-  if badLuck <= 8
-    piece = 'pawn'
-  else if badLuck == 9 || badLuck == 10
-    piece = 'rook'
-  else if badLuck == 11 || badLuck == 12
-    piece = 'knight'
-  else if badLuck == 13 || badLuck == 14
-    piece = 'bishop'
-  else if badLuck == 15
-    piece = 'queen'
-  else if badLuck == 16
-    piece = 'king'
+  if punishablePieces.length
+    piece = punishablePieces[randomInt punishablePieces.length - 1]
 
-  game.movePiece = piece
-  $move_piece_icon
-    .removeClass('icon-' + ['pawn','rook','knight','bishop','queen','king'].join(' icon-'))
-    .addClass('icon-' + piece)
-  $move_piece_name.html capitalize piece
+    game.movePiece = piece
+    $move_piece_icon
+      .removeClass('icon-' + ['pawn','rook','knight','bishop','queen','king'].join(' icon-'))
+      .addClass('icon-' + piece)
+    $move_piece_name.html capitalize piece
 
-  rerollAction()
+    rerollAction()
 
 rerollAction = ->
   piece = pieces[game.movePiece]
@@ -250,6 +256,7 @@ $info_close = $('.info_close button').on 'click', hideInfo
 $setup = $('.setup')
 $setup_time = $('.setup_time input')
 $setup_start = $('.setup_start button').on 'click', newGame
+$setup_pieces = $('.setup_pieces input')
 
 $board = $('.board')
 $board_showSetup = $('.board_showSetup').on 'click', showSetup
