@@ -45,20 +45,18 @@ SpecialElement.prototype =
       el.innerHTML = string
     this
 
-  addClass: (classes) ->
+  handleClasses: (method, classes) ->
     classes = classes.split /\s/
     for el in this.el
-      for newClass in classes
-        el.className += ' ' + newClass
+      for className in classes
+        el.classList[method] className
     this
 
+  addClass: (classes) ->
+    this.handleClasses 'add', classes
+
   removeClass: (classes) ->
-    classes = classes.split /\s/
-    for el in this.el
-      for classToRemove in classes
-        re = new RegExp '(^|\\s+)' + classToRemove + '($|\\s+)', 'g'
-        el.className = el.className.replace re, ' '
-    this
+    this.handleClasses 'remove', classes
 
   focus: ->
     for el in this.el
@@ -76,8 +74,14 @@ newGame = (e) ->
   e.preventDefault()
   game = new Game
   game.timeLimit = getTimeLimitFromSetup()
+  game.turn = 'white'
   startClock()
 
+nextTurn = (e) ->
+  e.preventDefault()
+  game.turn = if game.turn == 'white' then 'black' else 'white'
+  setBoardTheme()
+  startClock()
 
 # Info
 
@@ -119,8 +123,12 @@ getPunishablePiecesFromSetup = ->
 # Board
 
 showBoard = ->
+  setBoardTheme()
   $board.show()
   $setup.hide()
+
+setBoardTheme = ->
+  $board[if game && game.turn == 'black' then 'addClass' else 'removeClass'] 'board-black'
 
 
 # Clock
@@ -262,10 +270,10 @@ $board = $('.board')
 $board_showSetup = $('.board_showSetup').on 'click', showSetup
 
 $clock = $('.clock')
-$clock_time = $('.clock_time').on 'click', startClock
+$clock_time = $('.clock_time').on 'click', nextTurn
 $clock_pause = $('.clock_pause').on 'click', toggleClockPause
 $clock_surrender = $('.clock_surrender').on 'click', showMove
-$clock_next = $('.clock_next').on 'click', startClock
+$clock_next = $('.clock_next').on 'click', nextTurn
 
 $move = $('.move')
 $move_piece = $('.move_piece').on 'click', rerollPiece
@@ -273,7 +281,7 @@ $move_piece_icon = $('.move_piece_icon')
 $move_piece_name = $('.move_piece_name')
 $move_action = $('.move_action').on 'click', rerollAction
 $move_action_description = $('.move_action_description')
-$move_next = $('.move_next').on 'click', startClock
+$move_next = $('.move_next').on 'click', nextTurn
 
 showInfo()
 showSetup()

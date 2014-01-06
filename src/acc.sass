@@ -43,6 +43,10 @@ $mq-iphone-wide-max: $mq-iphone-wide-min - 1px
 *, *:before, *:after
   box-sizing: border-box
 
+html,
+body
+  height: 100%
+
 body
   font: #{$font-size}/#{$line-height} $font-family
   color: $color-text
@@ -247,10 +251,20 @@ label
     margin-right: $ws-xs
 
 
+// Board
+
+.board
+  height: 100%
+
+.board-black
+  color: $color-bg
+  background: $color-text
+
+
 // Clock
 
 .clock_time
-  margin: 5rem 0 $ws-lg
+  padding: 5rem 0 $ws-lg
   font-weight: bold
   font-size: 5em
   line-height: 1
@@ -260,6 +274,7 @@ label
   width: 100%
   margin-bottom: $ws
   padding: $ws 0
+  color: inherit
   background: transparent
   border: 0
   font-size: $font-size-xl
@@ -298,6 +313,7 @@ label
   line-height: $line-height-lg
 
 .move_next button
+  color: inherit
   background: transparent
   border: 0
   font-size: 4em
@@ -365,11 +381,11 @@ label
     margin: 0
 
   .clock_time
-    margin: $ws 0 $ws-xs
+    padding: $ws 0 $ws-xs
     font-size: 10em
 
   .move
-    margin-top: $ws-lg
+    padding-top: $ws-lg
 
   .move_piece,
   .move_action,
