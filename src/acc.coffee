@@ -281,7 +281,7 @@ $move_piece_icon = $('.move_piece_icon')
 $move_piece_name = $('.move_piece_name')
 $move_action = $('.move_action').on 'click', rerollAction
 $move_action_description = $('.move_action_description')
-$move_next = $('.move_next').on 'click', nextTurn
+$move_next = $('.move_next button').on 'click', nextTurn
 
 showInfo()
 showSetup()
